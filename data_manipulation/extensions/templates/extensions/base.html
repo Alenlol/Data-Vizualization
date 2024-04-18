@@ -8,8 +8,12 @@
 </head>
 <body>
 
+    <div class="mess_show">
+        {% include 'extensions/messages.html' %}
+    </div>
 
     <div class="main">
+
         {% block content %}
 
         {% endblock content %}
