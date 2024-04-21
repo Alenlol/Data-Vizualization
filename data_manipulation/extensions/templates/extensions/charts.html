@@ -6,17 +6,21 @@
 
     <form action="" method="GET">
 
-        {{form}}
+        {{form.new_choice}}
+
 
         <input type="submit" id="">
 
     </form>
 
 
+    <h1>
+        {{choices}}
+    </h1>
+
     {% if chart %}
 
         <img src="data:image/png;base64, {{chart|safe}}" alt="No image here">
-
 
 
     {% endif %}

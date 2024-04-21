@@ -11,5 +11,3 @@ class Document(models.Model):
         return self.name
 
 
-class Choices(models.Model):
-    Gender = models.CharField(max_length=1, choices=[])

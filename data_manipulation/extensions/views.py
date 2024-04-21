@@ -37,6 +37,15 @@ def chart(request):
     chart = Visualize()
     x, y = 0, 0
     result = ""
+    choices = ""
     form = SelectForm()
-    context = {'chart': result, 'form': form}
+    if request.method == 'GET':
+        form = SelectForm(request.GET)
+
+        if form.is_valid():
+            choices = form.fields['new_choice'].choices[int(request.GET.get('new_choice'))][1]
+
+            print("ok")
+
+    context = {'chart': result, 'form': form, 'choices': choices}
     return render(request, 'extensions/charts.html', context)

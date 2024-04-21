@@ -1,5 +1,5 @@
 from django import forms
-from .models import Choices, Document
+from .models import Document
 
 
 class UploadFileForm(forms.Form):
@@ -9,12 +9,11 @@ class UploadFileForm(forms.Form):
     )
 
 
-class SelectForm(forms.ModelForm):
+class SelectForm(forms.Form):
+    new_choice = forms.ChoiceField(choices=[])
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['Gender'].widget.choices = [(i, j[0]) for i, j in enumerate(Document.objects.values_list('name'))]
+        self.fields['new_choice'].choices = [(i, j[0]) for i, j in enumerate(Document.objects.values_list('name'))]
 
-    class Meta:
-        model = Choices
-        fields = ('Gender',)
 
