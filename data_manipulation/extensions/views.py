@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from .forms import UploadFileForm
+from .forms import UploadFileForm, SelectForm
 from .models import Document
+from django.core.exceptions import ObjectDoesNotExist
+from .utils import Visualize
 
 
 # Create your views here.
@@ -9,18 +11,32 @@ def home(request):
     form = UploadFileForm()
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            newdoc = Document(docfile = request.FILES['file'])
-            newdoc.save()
+        try:
+            newdoc = Document.objects.get(name=request.FILES['file'])
+        except ObjectDoesNotExist:
+            if form.is_valid():
+                newdoc = Document.objects.create(
+                    docfile=request.FILES['file'],
+                    name=request.FILES['file'],
+                )
+                newdoc.save()
 
-            messages.success(request, 'Successfully uploaded')
-
-            print(1)
+                messages.success(request, 'Successfully uploaded')
+            else:
+                messages.error(request, "some errors in form")
         else:
-            print(0)
+            messages.error(request, "file with this name is exist")
         return redirect('home')
 
     context = {'form': form}
 
     return render(request, 'extensions/home.html', context)
 
+
+def chart(request):
+    chart = Visualize()
+    x, y = 0, 0
+    result = ""
+    form = SelectForm()
+    context = {'chart': result, 'form': form}
+    return render(request, 'extensions/charts.html', context)
