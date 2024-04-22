@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import UploadFileForm, SelectForm
 from .models import Document
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from .utils import Visualize
 
 
@@ -12,18 +12,15 @@ def home(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         try:
-            newdoc = Document.objects.get(name=request.FILES['file'])
+            newdoc = Document.objects.get(name=request.FILES['docfile'])
         except ObjectDoesNotExist:
             if form.is_valid():
-                newdoc = Document.objects.create(
-                    docfile=request.FILES['file'],
-                    name=request.FILES['file'],
-                )
-                newdoc.save()
-
                 messages.success(request, 'Successfully uploaded')
+                file = form.save(commit=False)
+                file.name = request.FILES['docfile']
+                file.save()
             else:
-                messages.error(request, "some errors in form")
+                messages.error(request, form.errors['docfile'])
         else:
             messages.error(request, "file with this name is exist")
         return redirect('home')

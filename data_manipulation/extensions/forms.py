@@ -2,11 +2,10 @@ from django import forms
 from .models import Document
 
 
-class UploadFileForm(forms.Form):
-    file = forms.FileField(
-        label='Select a file',
-        help_text='max. 42 megabytes'
-    )
+class UploadFileForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ['docfile']
 
 
 class SelectForm(forms.Form):
