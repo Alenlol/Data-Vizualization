@@ -2,13 +2,14 @@ import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
 import pandas as pd
+from django.conf import settings
 
 
 class Visualize():
-    x: int
+    data: pd
 
-    def __init__(self):
-        pass
+    def __init__(self, data):
+        self.data = pd.read_csv(str(settings.BASE_DIR).replace('\\', '/')+'/static/data_collection/' + data)
 
     def get_graph(self):
         buffer = BytesIO()
@@ -24,9 +25,22 @@ class Visualize():
         plt.switch_backend('AGG')
         plt.figure(figsize=(10, 5))
         plt.title('Title')
-        plt.plot(x, y)
+        plt.plot(self.data[x], self.data[y])
         plt.xlabel('xitem')
         plt.ylabel('yitem')
         plt.tight_layout()
         graph = self.get_graph()
         return graph
+
+    def set_data(self, file):
+        self.data = pd.read_csv(file)
+
+    def get_title_names(self):
+        return self.data.columns
+
+    def check_data(self, values):
+        no_duplicate_value = set(values)
+
+        if len(no_duplicate_value) == len(values):
+            return True
+        return False

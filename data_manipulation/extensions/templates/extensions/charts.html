@@ -4,25 +4,29 @@
 
     <h1>Graph here</h1>
 
-    <form action="" method="GET">
+    <form action="." method="GET">
 
-        {{form}}
+        {% for form in title_formX %}
 
+            {{form}}
 
-        <input type="submit" id="">
+        {% endfor %}
 
+        {{title_formY.y_field}}
+
+        <input type="submit" value="add-title" name="form_type">
+
+        <input type="submit" value="pop" name="form_type">
+
+        <input type="submit" value="send" name="form_type">
     </form>
 
+    <div>
+        {% if chart %}
 
-    <h1>
-        {{choices}}
-    </h1>
+            <img src="data:image/png;base64, {{chart|safe}}" alt="No image here yet">
 
-    {% if chart %}
-
-        <img src="data:image/png;base64, {{chart|safe}}" alt="No image here">
-
-
-    {% endif %}
+        {% endif %}
+    </div>
 
 {% endblock content %}
