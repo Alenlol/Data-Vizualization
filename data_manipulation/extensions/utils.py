@@ -21,16 +21,24 @@ class Visualize():
         buffer.close()
         return graph
 
-    def get_plot(self, x, y):
+    def get_plot(self, x, y, **kwargs):
+        self.set_setting()
+        if kwargs['plot_type'] == 'plot':
+            plt.plot(self.data[x], self.data[y])
+        elif kwargs['plot_type'] == 'scatter':
+            plt.scatter(self.data[x], self.data[y])
+        elif kwargs['plot_type'] == 'bar':
+            plt.bar(self.data[x], self.data[y])
+        graph = self.get_graph()
+        return graph
+
+    def set_setting(self):
         plt.switch_backend('AGG')
         plt.figure(figsize=(10, 5))
         plt.title('Title')
-        plt.plot(self.data[x], self.data[y])
         plt.xlabel('xitem')
         plt.ylabel('yitem')
         plt.tight_layout()
-        graph = self.get_graph()
-        return graph
 
     def set_data(self, file):
         self.data = pd.read_csv(file)

@@ -41,3 +41,7 @@ class SelectColumnFormY(forms.Form):
 
         super(SelectColumnFormY, self).__init__(*args, **kwargs)
         self.fields['y_field'].choices = value_choices
+
+
+class SelectDataForm(forms.Form):
+    choosed_type = forms.RadioSelect()

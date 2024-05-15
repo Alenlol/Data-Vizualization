@@ -4,6 +4,8 @@
 
     <h1>Graph here</h1>
 
+    <a href="{% url 'files' %}">files</a>
+
     <form action="." method="GET">
 
         {% for form in title_formX %}
@@ -18,13 +20,17 @@
 
         <input type="submit" value="pop" name="form_type">
 
-        <input type="submit" value="send" name="form_type">
+        <input type="submit" value="show" name="form_type">
     </form>
 
     <div>
-        {% if chart %}
+        {% if charts %}
 
-            <img src="data:image/png;base64, {{chart|safe}}" alt="No image here yet">
+            {% for chart in charts %}
+
+                <img src="data:image/png;base64, {{chart|safe}}" alt="No image here yet">
+
+            {% endfor %}
 
         {% endif %}
     </div>
