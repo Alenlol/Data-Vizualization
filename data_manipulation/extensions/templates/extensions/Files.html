@@ -1,0 +1,19 @@
+{% extends 'extensions/base.html' %}
+
+{% block content %}
+
+    <h1>Choose Documents</h1>
+
+    <form action="" method="GET">
+
+        {{form}}
+
+        <input type="submit" name="form_type" class="border rounded p-1 btncs text-white">
+    </form>
+
+
+    <h1>
+        {{choices}}
+    </h1>
+
+{% endblock content %}

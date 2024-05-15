@@ -1,0 +1,27 @@
+main{
+    min-height: 100vh;
+    height: 100%;
+    background-color: #10926e;
+}
+
+p{
+    font-family: "Montserrat", sans-serif;
+}
+
+.container{
+    background-color: #424a81;
+    color: white;
+}
+
+.my_class{
+    border: none;
+}
+
+.btncs{
+    background-color: #424a81;
+    transition: all 0.2s;
+}
+
+.btncs:hover{
+    background-color: #10926e;
+}

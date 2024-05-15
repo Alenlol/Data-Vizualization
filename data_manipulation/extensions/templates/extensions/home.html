@@ -1,0 +1,15 @@
+{% extends 'extensions/base.html' %}
+
+
+{% block content %}
+
+<form method="POST" action="." enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <p>
+        {{form.docfile}}
+    </p>
+    <input type="submit" value="Upload" class="border rounded p-1 btncs text-white">
+</form>
+
+{% endblock content %}
