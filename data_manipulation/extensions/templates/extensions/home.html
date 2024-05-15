@@ -7,9 +7,9 @@
     {% csrf_token %}
 
     <p>
-        {{form}}
+        {{form.docfile}}
     </p>
-    <input type="submit" value="Upload">
+    <input type="submit" value="Upload" class="border rounded p-1 btncs text-white">
 </form>
 
 {% endblock content %}

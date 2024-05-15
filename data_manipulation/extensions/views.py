@@ -46,7 +46,7 @@ class FileChoose(TemplateView):
 
         if form.is_valid():
             choices = form.fields['new_choice'].choices[int(request.GET.get('new_choice'))][1]
-            return redirect('files_by', choices[:-4])
+            return redirect('files_by', choices[:-4])\
 
         context = {'form': form, 'choices': choices}
         return self.render_to_response(context)

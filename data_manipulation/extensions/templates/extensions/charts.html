@@ -2,9 +2,9 @@
 
 {% block content %}
 
-    <h1>Graph here</h1>
+    <h3 class="mt-4">Graph here</h3>
 
-    <a href="{% url 'files' %}">files</a>
+    <a href="{% url 'files' %}" class="h6 d-block mb-2">files</a>
 
     <form action="." method="GET">
 
@@ -16,14 +16,14 @@
 
         {{title_formY.y_field}}
 
-        <input type="submit" value="add-title" name="form_type">
+        <input type="submit" value="add-title" name="form_type" class="border rounded p-1 btncs text-white">
 
-        <input type="submit" value="pop" name="form_type">
+        <input type="submit" value="pop" name="form_type" class="border rounded p-1 btncs text-white">
 
-        <input type="submit" value="show" name="form_type">
+        <input type="submit" value="show" name="form_type" class="border rounded p-1 btncs text-white">
     </form>
 
-    <div>
+    <div class="mt-3">
         {% if charts %}
 
             {% for chart in charts %}

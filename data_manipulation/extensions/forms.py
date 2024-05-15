@@ -7,6 +7,10 @@ class UploadFileForm(forms.ModelForm):
         model = Document
         fields = ['docfile']
 
+    def __init__(self, *args, **kwargs):
+        super(UploadFileForm, self).__init__(*args, **kwargs)
+        self.fields['docfile'].widget.attrs['class'] = 'my_class'
+
 
 class SelectForm(forms.Form):
     new_choice = forms.ChoiceField()
